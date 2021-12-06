@@ -19,5 +19,5 @@ fn main() {
     let write_file = File::create(write_path).expect("Could not create file");
     let config = PrettyConfig::new();
     let partition = reduction::tdm_to_partition(&instance);
-    ser::to_writer_pretty(write_file, &partition, config).expect("soy viren y soy muy guapo uwu *shy*");
+    ser::to_writer_pretty(write_file, &partition, config).expect("soy viren y soy muy guapo uwu *shy*"); // TODO cambiar esto
 }
