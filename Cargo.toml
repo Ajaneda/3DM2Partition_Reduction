@@ -1,6 +1,6 @@
 [package]
 name = "cc_3dm_to_partition"
-authors = ["Javier Correa <alu0101233598@ull.edu.es>", "José Daniel Escánez <alu01@ull.edu.es>", "Alejandro Peraza <alu0101211770@ull.edu.es>", "Nerea Rodríguez <alu01@ull.edu.es>"]
+authors = ["Javier Correa <alu0101233598@ull.edu.es>", "José Daniel Escánez <alu0101238944@ull.edu.es>", "Alejandro Peraza <alu0101211770@ull.edu.es>", "Nerea Rodríguez <alu0101215693@ull.edu.es>"]
 version = "0.1.0"
 edition = "2021"
 

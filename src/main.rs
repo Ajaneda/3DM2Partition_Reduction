@@ -13,7 +13,7 @@ fn main() {
     let matches = App::new("TDM to Partition")
         .version("1.0.0")
         .author(crate_authors!("\n"))
-        .about("Teaches argument parsing")
+        .about("Converts a TDM instance to a Partition instance")
         .arg(Arg::with_name("v")
                  .short("v")
                  .long("verbose")
