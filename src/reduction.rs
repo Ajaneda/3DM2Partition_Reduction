@@ -64,9 +64,11 @@ impl ops::Add<&BinaryVector> for &BinaryVector {
         let mut result = vec![0; self.values.len()];
         let last_index = result.len() - 1;
         result[last_index] = self.values[last_index] ^ second_summand.values[last_index];
+        let mut carry = self.values[last_index] & second_summand.values[last_index];
         for (index, value) in self.values.iter().enumerate().rev().skip(1) {
-            result[index] = value ^ second_summand.values[index]
-                | self.values[index + 1] & second_summand.values[index + 1];
+            let current_xor_result = value ^ second_summand.values[index];
+            result[index] = current_xor_result ^ carry;
+            carry = value & second_summand.values[index] | carry & current_xor_result;
         }
 
         BinaryVector {
@@ -76,27 +78,37 @@ impl ops::Add<&BinaryVector> for &BinaryVector {
     }
 }
 
-pub fn tdm_to_partition(tdm: &TDM) -> Partition {
-    let p = ((tdm.m.len() + 1) as f64).log2().ceil() as usize;
+pub fn tdm_to_partition(tdm: &TDM, verbose: bool) -> Partition {
+    let p = ((tdm.get_m().len() + 1) as f64).log2().ceil() as usize;
     let mut binary_rows = vec![];
-    for tuple in &tdm.m {
-        binary_rows.push(BinaryVector::new(tdm.cardinality, p, *tuple));
-        println!(
-            "{} {}",
-            binary_rows[binary_rows.len() - 1],
-            binary_rows[binary_rows.len() - 1].to_decimal()
-        );
+    for (index, tuple) in tdm.get_m().iter().enumerate() {
+        binary_rows.push(BinaryVector::new(tdm.get_cardinality(), p, *tuple));
+        if verbose {
+            println!(
+                "s({})\t{} {}",
+                index,
+                binary_rows[index],
+                binary_rows[index].to_decimal()
+            );
+        }
     }
     let c = binary_rows
         .iter()
-        .fold(BinaryVector::empty(tdm.cardinality, p), |acc, x| &acc + &x);
+        .fold(BinaryVector::empty(tdm.get_cardinality(), p), |acc, x| {
+            &acc + &x
+        });
 
-    let b = BinaryVector::create_b(tdm.cardinality, p);
-    println!("{} {}", c, c.to_decimal());
-    println!("{} {}", b, b.to_decimal());
-    println!("b1: {}", c.to_decimal() * 2 - b.to_decimal());
-    println!("b2: {}", c.to_decimal() + b.to_decimal());
-    Partition {
-        values: vec![1, 2, 3, 4, 5, 6],
+    let b = BinaryVector::create_b(tdm.get_cardinality(), p);
+    let b1 = c.to_decimal() * 2 - b.to_decimal();
+    let b2 = c.to_decimal() + b.to_decimal();
+    if verbose {
+        println!("C\t{} {}", c, c.to_decimal());
+        println!("B\t{} {}", b, b.to_decimal());
+        println!("b1\t{}", &b1);
+        println!("b2\t{}", &b2);
     }
+    let mut values: Vec<usize> = binary_rows.iter().map(|x| x.to_decimal()).collect();
+    values.push(b1);
+    values.push(b2);
+    Partition { values }
 }
