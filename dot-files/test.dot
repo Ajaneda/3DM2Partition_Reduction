@@ -1,5 +1,6 @@
 digraph G {
-rankdir = LR;subgraph cluster_0 {
+rankdir = LR;
+subgraph cluster_0 {
 node [style=filled];
 w1 w2 w3;
 label = "W";
@@ -17,11 +18,11 @@ y1 y2 y3;
 label = "Y";
 }
 
-w1 -> x2 -> y3 [color="#FA5ABD"];
-w2 -> x1 -> y1 [color="#FA5ABD"];
-w3 -> x3 -> y2 [color="#FA5ABD"];
-w1 -> x1 -> y1 [color="#FA5ABD"];
-w2 -> x2 -> y2 [color="#FA5ABD"];
-w3 -> x2 -> y3 [color="#FA5ABD"];
-w3 -> x2 -> y1 [color="#FA5ABD"];
+w1 -> x2 -> y3 [color="#ff0000"];
+w2 -> x1 -> y1 [color="#ffdb00"];
+w3 -> x3 -> y2 [color="#49ff00"];
+w1 -> x1 -> y1 [color="#00ff92"];
+w2 -> x2 -> y2 [color="#0092ff"];
+w3 -> x2 -> y3 [color="#4900ff"];
+w3 -> x2 -> y1 [color="#ff00db"];
 }
