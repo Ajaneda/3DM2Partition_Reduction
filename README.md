@@ -12,7 +12,7 @@ Complejidad Computacional, ULL 21/22
 Este programa realiza la reducción en tiempo polinomial de una instancia del problema del Emparejamiento Tridimensional a una instancia del problema de la Partición. Ambas instancias estarán expresadas en el formato RON. 
 
 ## Cómo utilizarlo
-
+```
 Ejecución:
     cargo run -- [OPTIONS] <INPUT_FILE> <OUTPUT_FILE>
 
@@ -22,11 +22,12 @@ Argumentos Posicionales:
    
 
 Opciones:
-    -d, --dot-file <DOT_FILE>    Fichero de salida utilizado para convertir la instancia del Emparejamiento Tridimensional en un fichero en formato DOT
+    -d, --dot-file <DOT_FILE>    Fichero de salida utilizado para convertir la instancia del Emparejamiento Tridimensional en un fichero en formato DOT  
     -h, --help                   Imprime información de ayuda
     -v, --verbose                Muestra los pasos intermedios de la reducción
     -V, --version                Muestra la versión del paquete
 
-## Enlace al repositorio
+```
 
+## Enlace al repositorio
 [3DM2Partition_Reduction](https://github.com/Ajaneda/3DM2Partition_Reduction)
