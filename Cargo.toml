@@ -9,5 +9,5 @@ edition = "2021"
 [dependencies]
 ron = "*"
 serde = "*"
-clap = "*"
+clap = { version = "*", features = ["derive"] }
 colors-transform = "*"
